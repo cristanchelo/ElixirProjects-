@@ -4,6 +4,6 @@ defmodule SophosApp.Math do
   end
 end
 
-defmodule SophosApp.Geometry do
-  def rectangle_area(a, b), do: a * b
+defmodule SophosApp.Geometry.Rectangle do
+  def area(a, b), do: a * b
 end
