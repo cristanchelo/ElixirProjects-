@@ -1,20 +1,22 @@
 defmodule SophosApp.AdventOfCode.Day1 do
+  alias SophosApp.MyList
+  import String, only: [split: 3]
   def deliver_star1(instructions) do
     instructions
-    |> String.split("", trim: true)
+    |> split("", trim: true)
     |> evaluate(0)
   end
 
   def deliver2_star1(instructions) do
     instructions
-    |> String.split("", trim: true)
+    |> split("", trim: true)
     |> transform([])
-    |> SophosApp.MyList.sum()
+    |> MyList.sum()
   end
 
   def position_start2(instructions, pos) do
     instructions
-    |> String.split("", trim: true)
+    |> split("", trim: true)
     |> transform_pos(0, 0, pos)
   end
 
