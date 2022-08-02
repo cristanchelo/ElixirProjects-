@@ -41,4 +41,11 @@ defmodule SophosApp.MyList do
   end
   defp apply_function([], list, function), do: list
   defp apply_function([h|t], list, function), do: apply_function(t, list ++ [function.(h)], function)
+
+  def get_position(list, val) do
+    get_position(list, val, 1)
+  end
+  defp get_position([], val, pos), do: -1
+  defp get_position([h|t], val, pos) when h != val, do: get_position(t, val, pos + 1)
+  defp get_position([h|t], val, pos) when h == val, do: pos
 end
