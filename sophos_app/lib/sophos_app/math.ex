@@ -3,6 +3,7 @@ defmodule SophosApp.Math do
   Implementación básica del módulo de matemáticas de Sophos
   """
   @pi 3.1426
+  @e 2.71828
   @doc """
   Suma dos números cualquiera
   """
