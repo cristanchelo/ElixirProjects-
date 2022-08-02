@@ -1,3 +1,3 @@
 defmodule SophosApp.Example do
-  use SophosApp.Hello
+  use SophosApp.Hello, greetings: "Bonjour"
 end
