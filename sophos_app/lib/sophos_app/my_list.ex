@@ -33,7 +33,8 @@ defmodule SophosApp.MyList do
   defp generate(n, list), do: generate(n - 1, [n|list] )
 
   @doc """
-  Aplicar una función sobre cada uno de los elementos de una lista
+  Aplicar una función sobre cada uno de los elementos de una lista.
+  Se usa concatenación de listas: lista1 ++ lista2
   """
   def apply_function(list, function) do
     apply_function(list, [], function)
