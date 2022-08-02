@@ -41,5 +41,5 @@ defmodule SophosApp.FizzBuzz do
   @doc """
   Función que valida si n no es múltiplo de 3 ni múltiplo de 5
   """
-  defp fizz_buzz_sel(n) when rem(n,3) != 0 or rem(n,5) != 0, do: n
+  defp fizz_buzz_sel(n), do: n
 end
