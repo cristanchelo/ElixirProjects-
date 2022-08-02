@@ -1,6 +1,8 @@
 defmodule SophosApp.MyList do
   @moduledoc """
   Módulo con funciones para aplicar sobre listas
+  Ver enlace de ejemplo: https://www.oreilly.com/library/view/introducing-elixir/9781449369989/ch08.html
+  Introducing Elixir by Simon St. Laurent, J. David Eisenberg
   """
   @doc """
   Sumar los elementos de una lista
