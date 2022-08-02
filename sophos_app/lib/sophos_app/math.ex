@@ -22,6 +22,9 @@ defmodule SophosApp.Math do
   def kind(0), do: :zero
   def kind(n) when n > 0, do: :positive
 
+  @doc """
+  Determina el área de la circunferencia
+  """
   def circunference(r), do: 2 * r * @pi
 
   defmodule Geometry.Rectangle do
