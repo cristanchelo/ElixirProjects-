@@ -5,6 +5,7 @@ defmodule SophosApp.ProjectEuler do
     n - 1
     |> MyList.generate()
     |> transform()
+    |> IO.inspect()
     |> MyList.sum()
   end
 
