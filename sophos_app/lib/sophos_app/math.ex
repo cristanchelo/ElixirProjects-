@@ -22,10 +22,11 @@ defmodule SophosApp.Math do
   def kind(0), do: :zero
   def kind(n) when n > 0, do: :positive
 
-  @moduledoc """
-  Módulo para cálculo de fórmulas geométricas
-  """
+
   defmodule Geometry.Rectangle do
+    @moduledoc """
+    Módulo para cálculo de fórmulas geométricas
+    """
     @doc """
     Obtiene el área de un cuadrilatero de la misma longitud en ambos lados
     """
