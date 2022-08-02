@@ -11,6 +11,10 @@ defmodule SophosApp.FibonacciServer do
       {:status, msg} ->
         IO.puts("Running #{inspect(msg)}")
         loop()
+
+      {:exit, reason} ->
+        IO.puts("bye for #{inspect(reason)}")
+
       message -> IO.puts(message)
       loop()
       #after
