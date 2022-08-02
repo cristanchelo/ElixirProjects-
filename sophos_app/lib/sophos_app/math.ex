@@ -3,7 +3,6 @@ defmodule SophosApp.Math do
   Implementación básica del módulo de matemáticas de Sophos
   """
   @pi 3.1426
-  @e 2.71828
   @doc """
   Suma dos números cualquiera
   """
@@ -23,6 +22,7 @@ defmodule SophosApp.Math do
   def kind(0), do: :zero
   def kind(n) when n > 0, do: :positive
 
+  def circunference(r), do: 2 * r * @pi
 
   defmodule Geometry.Rectangle do
     @moduledoc """
