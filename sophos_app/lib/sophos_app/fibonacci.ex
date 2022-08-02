@@ -13,7 +13,7 @@ defmodule SophosApp.Fibonacci do
   end
 
   @doc """
-  Fibonacci - Recursión de Cola
+  Fibonacci - Recursión de Cola Versión Map
   """
   def sequenceTail(n) do
     sequenceTail(n, %{n1: 0, n2: 1} )
@@ -21,4 +21,15 @@ defmodule SophosApp.Fibonacci do
   defp sequenceTail(0, %{n1: a, n2: b}), do: a
   defp sequenceTail(1, %{n1: a, n2: b}), do: b
   defp sequenceTail(n, map), do: sequenceTail(n - 1, %{n1: map.n2, n2: map.n1 + map.n2} )
+
+  @doc """
+  Fibonacci - Recursión de Cola Versión Listas
+  """
+  def sequenceTail_List(n) do
+    do_sequenceTail_list(n, 1, [1, 0] )
+  end
+  defp do_sequenceTail_list(n, n, [h | _]), do: h
+  defp do_sequenceTail_list(n, i, [n2, n1 | _t] = l) do
+    do_sequenceTail_list(n, i + 1, [n1 + n2 | l])
+  end
 end
