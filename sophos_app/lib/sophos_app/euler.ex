@@ -2,7 +2,7 @@ defmodule SophosApp.ProjectEuler do
   alias SophosApp.MyList
   import String, only: [split: 3]
   def project_1(n) do
-    n
+    n - 1
     |> MyList.generate()
     |> filter()
   end
