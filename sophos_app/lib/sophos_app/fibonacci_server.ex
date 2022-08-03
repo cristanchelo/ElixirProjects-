@@ -16,8 +16,9 @@ defmodule SophosApp.FibonacciServer do
       {:exit, reason} ->
         IO.puts("bye for #{inspect(reason)}")
 
-      message -> IO.puts(message)
-      loop()
+      _message ->
+        IO.puts("Bad operation")
+        loop()
       #after
       #  1500 -> IO.puts("Se acabó")
     end
