@@ -9,7 +9,9 @@ defmodule SophosApp.AdventOfCode.Day1 do
   alias SophosApp.MyList
   @impl
   import String, only: [split: 3]
+
   @doc """
+  Advent of Code 2015: Día 1 - Estrella 1
   Sumar las coincidencias partiendo de un valor en cero.
   Hace uso de funciones privadas y pattern matching.
   """
@@ -20,6 +22,7 @@ defmodule SophosApp.AdventOfCode.Day1 do
   end
 
   @doc """
+  Advent of Code 2015: Día 1 - Estrella 1
   Sumar las coincidencias partiendo de la suma de los elementos de una lista
   transformada en valores equivalentes a cada uno de los dos caracteres.
   Hace uso de funciones privadas y pattern matching.
@@ -32,6 +35,7 @@ defmodule SophosApp.AdventOfCode.Day1 do
   end
 
   @doc """
+  Advent of Code 2015: Día 1 - Estrella 1
   Uso del módulo Enum y la función reduce para resolver el ejercicio 1
   del número de piso según la cadena de caracteres.
   Enum.reduce(list, 0, fn
@@ -49,6 +53,7 @@ defmodule SophosApp.AdventOfCode.Day1 do
   end
 
   @doc """
+  Advent of Code 2015: Día 1 - Estrella 1
   Uso del módulo Enum y las funciones map y sum para resolver el ejercicio 1
   del número de piso según la cadena de caracteres.
   Enum.map(lista, fn
@@ -68,7 +73,8 @@ defmodule SophosApp.AdventOfCode.Day1 do
   end
 
   @doc """
-  Uso del módulo Enum y las funciones map y sum para resolver el ejercicio 1
+  Advent of Code 2015: Día 1 - Estrella 2
+  Uso del módulo Enum y las funciones map y sum para resolver el ejercicio 2
   de la primera ubicación de la bodega o piso -1 dentro la cadena de caracteres.
   Enum.map(lista, fn
       "(" -> 1
@@ -104,4 +110,106 @@ defmodule SophosApp.AdventOfCode.Day1 do
 
   defp transform_pos([h | t], floor, pos, val) when floor != val, do: transform_pos(t, floor + h, pos + 1, val)
   defp transform_pos(list, floor, pos, val) when list == [] or floor == -1, do: pos
+end
+
+defmodule SophosApp.AdventOfCode.Day2 do
+  @moduledoc """
+  Módulo para ejercicio de AdventOfCode 2015 Día 2:
+  Calcular la cantidad de papel necesario para envolver un presente, de la forma de prisma rectangular recto:
+  length l, width w, height h
+  """
+  @impl
+  import String, only: [split: 3]
+
+  @doc """
+  Advent of Code 2015: Día 2 - Estrella 1
+  Dado una lista de cadenas de la forma LxWxH, que representan las dimensiones de todos
+  las cajas usadas para los presentes de navidad, de la forma de un prisma reactangular recto,
+  obtener el área superficial de la caja más el área mínima de una de las caras
+  para calcular el total de área total superficial necesaria de papel para
+  cada uno de los regalos.
+  """
+  def total_paper_sup_areas_star_1(list_box_dimension) do
+    split_scape_char(list_box_dimension)
+    |>Enum.map(&box_superficial_area/1)
+    |>Enum.sum()
+  end
+
+  @doc """
+  Dado un string de la forma L*W*H, obtener una lista de enteros [L, W, H] que representan
+  los lados de un prisma rectangular recto, obtener el área superficial total necesaria de
+  papel para poder cubrir la caja.
+  """
+  defp box_superficial_area(box_dimension) do
+    box_dimension
+    |>split_integer_list
+    |>get_paper_sup_area
+  end
+
+  @doc """
+  Dada una una lista de enteros [L, W, H] que representan
+  los lados de un prisma rectangular recto,
+  obtener el área superficial total necesaria de papel para poder cubrir la caja.
+  """
+  defp get_paper_sup_area ([l, w, h]) do
+    sup_areas =  [l*w, w*h, h*l]
+    total_sup_area = 2 * Enum.sum(sup_areas)
+    min_area = Enum.min(sup_areas)
+    paper_sup_area = total_sup_area + min_area
+  end
+
+  @doc """
+  Advent of Code 2015: Día 2 - Estrella 2
+  Dado una lista de cadenas de la forma L*W*H, obtener, por cada cadena, una lista [L, W, H].
+  Luego, obtener el perímetro mínimo de una de las caras
+  para poder cruzar la cinta más el volumen de cada caja con el cual
+  calcular la cantidad de cinta a envolver por todos los presentes.
+  """
+  def total_ribbon_star_2(list_box_dimension) do
+    split_scape_char(list_box_dimension)
+    |>Enum.map(&box_perimeter/1)
+    |>Enum.sum()
+  end
+
+  @doc """
+  Dado un string de la forma L*W*H, obtener una lista de enteros [L, W, H] que representan
+  los lados de un prisma rectangular recto.
+  Luego, obtener el perímetro mínimo de una de las caras
+  para poder cruzar la cinta más el volumen de cada caja con el cual
+  calcular la cantidad de cinta a envolver por todos los presentes.
+  """
+  defp box_perimeter(box_dimension) do
+    box_dimension
+    |>split_integer_list
+    |>get_ribbon_required
+  end
+
+  @doc """
+  Dado una lista de enteros [L, W, H] que representan los lados de un prisma rectangular recto,
+  obtener el perímetro mínimo de uno de los lados.
+  Luego sumar el producto de los lados del prisma.
+  """
+  defp get_ribbon_required([l, w, h] = dimension) do
+    min_perimeters = [2*l + 2*w, 2*w + 2*h, 2*h + 2*l] |> Enum.min()
+    total_ribbon = min_perimeters + Enum.product(dimension)
+  end
+
+  @doc """
+  Dada una cadena de la forma "LxWxH" donde L, W y H son enteros
+  obtener una lista de enteros [L, W, H]
+  """
+  defp split_integer_list(string_val) do
+    string_val
+    |>split("x", trim: true)
+    |>Enum.map(&String.to_integer/1) #Función llamada con el operador & y de paridad 1
+  end
+
+  @doc """
+  Dada cadena de la forma "L1xW1xH1\r\nL2xW2xH2\r\n...LnxWnxHn"
+  obtener una lista de cadenas de la forma ["L1xW1xH1", L2xW2xH2, ..., LnxWnxHn]
+  """
+  defp split_scape_char(string_val) do
+    Regex.replace(~r/\n/, string_val, "")
+    |>split("\r", trim: true)
+  end
 end
