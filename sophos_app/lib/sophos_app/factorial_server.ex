@@ -1,25 +1,11 @@
 defmodule SophosApp.FactorialServer do
   alias SophosApp.Factorial
 
-  def handle_message(caller) do
-    receive do
-      {:compute, n} ->
+  def handle_message({:compute, n}, caller) do
         result = Factorial.of(n)
         send(caller, {:compute, n, result})
-        handle_message(caller)
-
-      {:status} ->
-        send(caller, {:ok, "ok"})
-        handle_message(caller)
-
-      {:exit, reason} ->
-        IO.puts("bye for #{inspect(reason)}")
-
-      _message ->
-        IO.puts("Bad operation")
-        handle_message(caller)
-      #after
-      #  1500 -> IO.puts("Se acabó")
-    end
+  end
+  def handle_message({:status} , caller) do
+    send(caller, {:ok, caller})
   end
 end
