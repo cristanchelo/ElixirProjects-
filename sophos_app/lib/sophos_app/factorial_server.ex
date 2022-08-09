@@ -1,34 +1,23 @@
 defmodule SophosApp.FactorialServer do
   alias SophosApp.Factorial
-  def start() do
-    spawn(__MODULE__, :loop, [{0}])
-  end
 
-  def start_link() do
-    spawn_link(__MODULE__, :loop, [{0}])
-  end
-
-  def start_monitor() do
-    spawn_monitor(__MODULE__, :loop, [{0}])
-  end
-
-  def loop({counter} = state) do
+  def handle_message(caller) do
     receive do
-      {:compute, caller, n} ->
+      {:compute, n} ->
         result = Factorial.of(n)
         send(caller, {:compute, n, result})
-        loop(counter + 1)
+        handle_message(caller)
 
-      {:status, caller} ->
-        send(caller, {:ok, state})
-        loop(state)
+      {:status} ->
+        send(caller, {:ok, "ok"})
+        handle_message(caller)
 
       {:exit, reason} ->
         IO.puts("bye for #{inspect(reason)}")
 
       _message ->
         IO.puts("Bad operation")
-        loop(state)
+        handle_message(caller)
       #after
       #  1500 -> IO.puts("Se acabó")
     end
