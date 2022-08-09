@@ -1,11 +1,10 @@
 defmodule SophosApp.FibonacciServer do
   alias SophosApp.Fibonacci
 
-  def handle_message({:sequence, n}, caller) do
-    result = Fibonacci.sequence(n)
-    send(caller, {:fibonacci, n, result})
+  def handle_message({:sequence, n}, _caller) do
+    Fibonacci.sequence(n)
   end
-  def handle_message({:status, n},caller) do
-    send(caller, {:ok, caller})
+  def handle_message({:status, n}, _caller) do
+    :ok
   end
 end
