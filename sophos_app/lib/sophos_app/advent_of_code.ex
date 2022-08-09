@@ -213,3 +213,76 @@ defmodule SophosApp.AdventOfCode.Day2 do
     |>split("\r", trim: true)
   end
 end
+
+defmodule SophosApp.AdventOfCode.Day3 do
+  @moduledoc """
+  Módulo para ejercicio de AdventOfCode 2015 Día 3:
+  Calcular el número de casas que visita Santa para entregar, al menos, un regalos
+  """
+  @impl
+  import String, only: [split: 3]
+
+  @doc """
+  Advent of Code 2015: Día 3 - Estrella 1
+  Dado una serie de indicaciones por coordenadas, indicar el número de casas en las cuales
+  se entregó al menos un regalo.
+  ^ -> Norte -> [0, 1]
+  v -> Sur   -> [0, -1]
+  > -> Este  -> [1, 0]
+  < -> Oeste -> [-1, 0]
+  """
+  def get_houses_number_star_1(list_routes) do
+    list_directions = [[0,0] | split(list_routes,"", trim: true)|>get_route_information()]
+    list_directions
+    |>Enum.scan(fn ([x,y], [dx,dy]) -> [x+dx,y+dy] end)
+    |>Enum.uniq()
+    |>Enum.count()
+  end
+
+  @doc """
+  Dado un carácter, obtener la lista de enteros [X, Y] que representa el
+  movimiento que hace Santa para dirigirse a la próxima casa a entregar un presente
+  """
+  defp get_route_information(route), do: Enum.map(route, fn
+    "^" -> [0,1]
+    "v" -> [0,-1]
+    ">" -> [1,0]
+    "<" -> [-1,0]
+  end)
+
+  @doc """
+  Advent of Code 2015: Día 3 - Estrella 2
+  Dado una serie de indicaciones por coordenadas, indicar el número de casas en las cuales
+  se entregó al menos un regalo, teniendo en cuenta que los entregan Santa y Robo-Santa
+  empezando en [0,0] y cada uno se turna para realizar la respectiva entrega en las ubicaciones
+  indicadas
+  ^ -> Norte -> [0, 1]
+  v -> Sur   -> [0, -1]
+  > -> Este  -> [1, 0]
+  < -> Oeste -> [-1, 0]
+  """
+  def get_two_houses_number_star_2(list_routes) do
+    list_directions = [[0,0] | split(list_routes,"", trim: true)|>get_route_information()]
+    two_routes = list_directions
+    |>Enum.with_index()
+    |>Enum.group_by(fn {_,y}  -> rem(y,2) == 0 end)
+    list_first_partner = Map.get(two_routes, :true)
+                         |>Enum.map(fn {value, _} -> value end)
+    list_second_partner = Map.get(two_routes, :false)
+                         |>Enum.map(fn {value, _} -> value end)
+    include_total_routes = get_complete_houses_info(list_first_partner) ++ get_complete_houses_info(list_second_partner)
+    include_total_routes
+    |>Enum.uniq()
+    |>Enum.count()
+  end
+
+  @doc """
+  Dado una lista con unas determinadas coordenadas [[x,y], [x1,y1], ...,[xn,yn]]
+  obtener una lista única con los pasos o recorridos acumulados desde [x,y] hasta [xn, yn]
+  """
+  defp get_complete_houses_info(list_routes_index) do
+    list_routes_index
+    |>Enum.scan(fn ([x,y], [dx,dy]) -> [x+dx,y+dy] end)
+    |>Enum.uniq()
+  end
+end
