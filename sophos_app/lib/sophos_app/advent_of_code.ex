@@ -217,7 +217,8 @@ end
 defmodule SophosApp.AdventOfCode.Day3 do
   @moduledoc """
   Módulo para ejercicio de AdventOfCode 2015 Día 3:
-  Calcular el número de casas que visita Santa para entregar, al menos, un regalos
+  Calcular el número de casas que visita Santa para entregar, al menos, un regalo.
+  https://windmaomao.medium.com/kotlin-day-3-e41f300e23c0
   """
   @impl
   import String, only: [split: 3]
