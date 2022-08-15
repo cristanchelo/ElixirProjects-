@@ -4,7 +4,7 @@ defmodule SophosApp.PingPongProc do
 
   Basado en los siguientes ejemplos:
   https://github.com/oelizondo/pingpong/blob/master/pingpong.exs
-  https://github.com/cristanchelo/ElixirProjects-/blob/master/sophos_app/lib/sophos_app/ping_pong_proc.ex
+  https://github.com/aviabird/elixir-beginner/blob/master/ping-pong.exs
   """
   @doc """
   Función para recibir el proceso a validar con su mensaje

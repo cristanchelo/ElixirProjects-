@@ -1,7 +1,18 @@
 defmodule SophosApp.ProjectEuler do
+  @moduledoc """
+  Módulo con funciones relacionadas con la solución de ejercicio de ProjectEuler
+  https://projecteuler.net/
+  """
   alias SophosApp.MyList
   import String, only: [split: 3]
-  def project_1(n) do
+
+  @doc """
+  Función para obtener la lista de números de 0...n
+  Usando IO_inspect se visualiza una nueva lista solo con los números
+  múltiplos de 3 y de 5, y los demás en 0.
+  Adicional, obtiene la lista de dichos números.
+  """
+  def list_three_five_nums_with_sum(n) do
     n - 1
     |> MyList.generate()
     |> transform()
@@ -9,7 +20,13 @@ defmodule SophosApp.ProjectEuler do
     |> MyList.sum()
   end
 
-  def project_1_bizz(n) do
+  @doc """
+  Función para obtener la lista de números de 0...n
+  Usando IO_inspect se visualiza una nueva lista solo con los números
+  múltiplos de 3 y de 5, filtrando la lista para excluir los demás números.
+  Adicional, obtiene la lista de dichos números.
+  """
+  def list_three_five_nums_with_sum_filter(n) do
     n - 1
     |> MyList.generate()
     |> filter()

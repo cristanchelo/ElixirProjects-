@@ -1,4 +1,11 @@
 defmodule SophosApp.ParallelList do
+  @moduledoc """
+  Módulo para ejecutar un procesos en paralelo que aplican una función
+  a cada elemento de una lista
+  """
+  @doc """
+  Función con una lista de procesos que ejecutan una función pasada por parámetro.
+  """
   def pmap(list, fun) do
     list
     |> Enum.map(&spawn_process(&1, self(), fun)) #Lista de procesos que ejecutaron algo
