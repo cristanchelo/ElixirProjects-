@@ -22,13 +22,7 @@ defmodule SophosApp.FibonacciGenServer do
   end
 
   def handle_call({:sequence, n}, _from, state) do
-    result =
-    state
-    |>Map.fetch(n)
-    |>case do
-      {:ok, r} -> r
-      :error -> Fibonacci.sequence(n)
-    end
+    result = compute_sequence(n, state)
     new_state = Map.put_new(state, n, result)
     {:reply, result, new_state}
   end
