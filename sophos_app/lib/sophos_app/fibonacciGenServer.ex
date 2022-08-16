@@ -24,8 +24,18 @@ defmodule SophosApp.FibonacciGenServer do
     {:reply, state, state}
   end
 
-  #def handle_cast({:sequence, n}, state) do
-  #  result = Fibonacci.sequence(n)
-  #  {:noreply, state}
-  #end
+  def handle_cast({:sequence, n}, state) do
+    result = compute_sequence(n, state)
+    new_state = Map.put_new(state, n, result)
+    {:noreply, new_state}
+  end
+
+  defp compute_sequence(n, state) do
+      state
+      |>Map.fetch(n)
+      |>case do
+        {:ok, r} -> r
+        :error -> Fibonacci.sequence(n)
+      end
+  end
 end
