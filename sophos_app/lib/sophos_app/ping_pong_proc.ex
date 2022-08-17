@@ -11,7 +11,7 @@ defmodule SophosApp.PingPongProc do
   """
   def handle_message({pid_sender, turn}, caller, state) do
     IO.puts "PID #{inspect pid_sender}, turn #{inspect turn}"
-    :timer.sleep(10000)
+    :timer.sleep(1000)
     result = switch(turn)
     {:ok, {self, result}, [result | state]}
   end
