@@ -10,7 +10,7 @@ defmodule SophosApp.FactorialSupervisor do
   Función para crear el proceso Supervisor, para SophosApp.FactorialSupervisor
   """
   def start_link(args) do
-    Supervisor.start_link(__MODULE__, args)
+    Supervisor.start_link(__MODULE__, args, name: __MODULE__)
   end
 
   @doc """

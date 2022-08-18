@@ -1,10 +1,9 @@
-defmodule SophosApp.FibonacciSupervisor do
+defmodule SophosApp.Supervisor do
   @moduledoc """
   Módulo para asociar un Supervisor al proceso que es generado
   por el módulo SophosApp.FibonacciGenServer
   """
   use Supervisor
-  alias SophosApp.FibonacciGenServer
 
   @doc """
   Función para crear el proceso Supervisor
@@ -17,7 +16,11 @@ defmodule SophosApp.FibonacciSupervisor do
   Función para inicializar el proceso Supervisor con el módulo SophosApp.FibonacciGenServer
   """
   def init(_args) do
-    children = [FibonacciGenServer]
+    children = [
+      {SophosApp.FibonacciSupervisor, []},
+      {SophosApp.FactorialSupervisor, []},
+      {Task.Supervisor, [name: SophosApp.TaskSupervisor]}
+    ]
 
     Supervisor.init(children, strategy: :one_for_one)
   end
