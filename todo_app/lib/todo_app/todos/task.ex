@@ -14,5 +14,6 @@ defmodule TodoApp.Todos.Task do
     task
     |> cast(attrs, [:description, :done])
     |> validate_required([:description, :done])
+    |> validate_length(:description, min: 5)
   end
 end
