@@ -18,4 +18,19 @@ defmodule TodoApp.TodosFixtures do
 
     task
   end
+
+  @doc """
+  Generate a task_list.
+  """
+  def task_list_fixture(attrs \\ %{}) do
+    {:ok, task_list} =
+      attrs
+      |> Enum.into(%{
+        name: "some name",
+        tags: []
+      })
+      |> TodoApp.Todos.create_task_list()
+
+    task_list
+  end
 end

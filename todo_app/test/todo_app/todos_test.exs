@@ -58,4 +58,60 @@ defmodule TodoApp.TodosTest do
       assert %Ecto.Changeset{} = Todos.change_task(task)
     end
   end
+
+  describe "task_lists" do
+    alias TodoApp.Todos.TaskList
+
+    import TodoApp.TodosFixtures
+
+    @invalid_attrs %{name: nil, tags: nil}
+
+    test "list_task_lists/0 returns all task_lists" do
+      task_list = task_list_fixture()
+      assert Todos.list_task_lists() == [task_list]
+    end
+
+    test "get_task_list!/1 returns the task_list with given id" do
+      task_list = task_list_fixture()
+      assert Todos.get_task_list!(task_list.id) == task_list
+    end
+
+    test "create_task_list/1 with valid data creates a task_list" do
+      valid_attrs = %{name: "some name", tags: []}
+
+      assert {:ok, %TaskList{} = task_list} = Todos.create_task_list(valid_attrs)
+      assert task_list.name == "some name"
+      assert task_list.tags == []
+    end
+
+    test "create_task_list/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Todos.create_task_list(@invalid_attrs)
+    end
+
+    test "update_task_list/2 with valid data updates the task_list" do
+      task_list = task_list_fixture()
+      update_attrs = %{name: "some updated name", tags: []}
+
+      assert {:ok, %TaskList{} = task_list} = Todos.update_task_list(task_list, update_attrs)
+      assert task_list.name == "some updated name"
+      assert task_list.tags == []
+    end
+
+    test "update_task_list/2 with invalid data returns error changeset" do
+      task_list = task_list_fixture()
+      assert {:error, %Ecto.Changeset{}} = Todos.update_task_list(task_list, @invalid_attrs)
+      assert task_list == Todos.get_task_list!(task_list.id)
+    end
+
+    test "delete_task_list/1 deletes the task_list" do
+      task_list = task_list_fixture()
+      assert {:ok, %TaskList{}} = Todos.delete_task_list(task_list)
+      assert_raise Ecto.NoResultsError, fn -> Todos.get_task_list!(task_list.id) end
+    end
+
+    test "change_task_list/1 returns a task_list changeset" do
+      task_list = task_list_fixture()
+      assert %Ecto.Changeset{} = Todos.change_task_list(task_list)
+    end
+  end
 end
