@@ -21,6 +21,11 @@ defmodule TodoApp.Todos do
     Repo.all(Task)
   end
 
+  def list_tasks_by_user(user_id) do
+    Task.tasks_by_user(user_id)
+    |>Repo.all()
+  end
+
   @doc """
   Gets a single task.
 

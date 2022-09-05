@@ -13,6 +13,10 @@
   <%= checkbox f, :done %>
   <%= error_tag f, :done %>
 
+  <%= label f, :expiration %>
+  <%= datetime_select f, :expiration %>
+  <%= error_tag f, :datetime_select %>
+  
   <div>
     <%= submit "Save" %>
   </div>
