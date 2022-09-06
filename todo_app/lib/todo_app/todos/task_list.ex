@@ -20,7 +20,7 @@ defmodule TodoApp.Todos.TaskList do
     |> cast(attrs, [:name, :tags, :user_id])
     |> validate_required([:name, :tags, :user_id])
     |> cast_assoc(:tasks)
-    |> IO.inspect()
+    |> foreign_key_constraint(:user_id)
   end
 
   def task_lists_by_user(user_id) do
