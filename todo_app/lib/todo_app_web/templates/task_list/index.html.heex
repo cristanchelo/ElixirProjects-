@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Tags</th>
+      <th>User</th>
 
       <th></th>
     </tr>
@@ -14,6 +15,7 @@
     <tr>
       <td><%= task_list.name %></td>
       <td><%= task_list.tags %></td>
+      <td><%= task_list.user.email %></td>
 
       <td>
         <span><%= link "Show", to: Routes.task_list_path(@conn, :show, task_list) %></span>

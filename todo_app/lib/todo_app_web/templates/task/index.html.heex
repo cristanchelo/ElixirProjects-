@@ -6,6 +6,8 @@
       <th>Description</th>
       <th>Done</th>
 
+      <th>User</th>
+
       <th></th>
     </tr>
   </thead>
@@ -14,6 +16,7 @@
     <tr>
       <td><%= task.description %></td>
       <td><%= task.done %></td>
+      <td><%= task.user.email %></td>
 
       <td>
         <span><%= link "Show", to: Routes.task_path(@conn, :show, task) %></span>

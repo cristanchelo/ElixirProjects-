@@ -33,6 +33,7 @@ defmodule TodoApp.Todos do
   def list_tasks_by_user(user_id) do
     Task.tasks_by_user(user_id)
     |>Repo.all()
+    |>Repo.preload(:user)
   end
 
   @doc """
@@ -143,6 +144,7 @@ defmodule TodoApp.Todos do
   def list_task_lists_by_user(user_id) do
     TaskList.task_lists_by_user(user_id)
     |>Repo.all()
+    |>Repo.preload(:user)
   end
 
   @doc """

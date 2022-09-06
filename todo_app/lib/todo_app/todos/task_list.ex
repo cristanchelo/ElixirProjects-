@@ -7,7 +7,7 @@ defmodule TodoApp.Todos.TaskList do
   schema "task_lists" do
     field :name, :string
     field :tags, {:array, :string}
-    field :user_id, :id
+    belongs_to :user, User
     has_many :collaborators, User
     timestamps()
   end
