@@ -3,12 +3,14 @@ defmodule TodoApp.Todos.TaskList do
   import Ecto.Changeset
   import Ecto.Query, only: [from: 2]
   alias TodoApp.Accounts.User
+  alias TodoApp.Todos.TasksListAssoc
 
   schema "task_lists" do
     field :name, :string
     field :tags, {:array, :string}
     belongs_to :user, User
     has_many :collaborators, User
+    many_to_many :tasks, TodoApp.Todos.Task, join_through: TasksListAssoc
     timestamps()
   end
 
