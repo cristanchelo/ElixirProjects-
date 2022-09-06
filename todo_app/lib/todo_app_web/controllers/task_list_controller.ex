@@ -5,16 +5,21 @@ defmodule TodoAppWeb.TaskListController do
   alias TodoApp.Todos.TaskList
 
   def index(conn, _params) do
-    task_lists = Todos.list_task_lists()
+    user = conn.assigns.current_user
+    task_lists = Todos.list_task_lists_by_user(user.id)
     render(conn, "index.html", task_lists: task_lists)
   end
 
   def new(conn, _params) do
     changeset = Todos.change_task_list(%TaskList{})
+    IO.inspect(changeset)
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"task_list" => task_list_params}) do
+    user = conn.assigns.current_user
+    task_list_params = Map.merge(task_list_params, %{"user_id" => user.id})
+
     case Todos.create_task_list(task_list_params) do
       {:ok, task_list} ->
         conn

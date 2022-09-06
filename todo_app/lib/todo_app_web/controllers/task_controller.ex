@@ -41,9 +41,6 @@ defmodule TodoAppWeb.TaskController do
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do
-    user = conn.assigns.current_user
-    task_params = Map.merge(task_params, %{"user_id" => user.id})
-
     task = Todos.get_task!(id)
 
     case Todos.update_task(task, task_params) do

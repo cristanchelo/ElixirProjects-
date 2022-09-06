@@ -21,6 +21,15 @@ defmodule TodoApp.Todos do
     Repo.all(Task)
   end
 
+  @doc """
+  Returns the list of tasks by user.
+
+  ## Examples
+
+      iex> list_tasks(%User{"id"=>X})
+      [%Task{}, ...]
+
+  """
   def list_tasks_by_user(user_id) do
     Task.tasks_by_user(user_id)
     |>Repo.all()
@@ -120,6 +129,20 @@ defmodule TodoApp.Todos do
   """
   def list_task_lists do
     Repo.all(TaskList)
+  end
+
+  @doc """
+  Returns the list of task_lists by principal user.
+
+  ## Examples
+
+      iex> list_task_lists_by_user(%User{"id"=>X})
+      [%TaskList{}, ...]
+
+  """
+  def list_task_lists_by_user(user_id) do
+    TaskList.task_lists_by_user(user_id)
+    |>Repo.all()
   end
 
   @doc """
