@@ -13,9 +13,10 @@ defmodule TodoApp.Todos.TasksListAssoc do
   end
 
   def changeset(struct, params) do
+    IO.inspect(binding())
+
     struct
-    |> cast(params, [:task_id, :task_list_id])
-    |> IO.inspect()
+    |> cast(params, [])
   end
 
 end
