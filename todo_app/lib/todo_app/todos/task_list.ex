@@ -18,8 +18,9 @@ defmodule TodoApp.Todos.TaskList do
   def changeset(task_list, attrs) do
     task_list
     |> cast(attrs, [:name, :tags, :user_id])
-    |> cast_assoc(:collaborators)
     |> validate_required([:name, :tags, :user_id])
+    |> cast_assoc(:tasks)
+    |> IO.inspect()
   end
 
   def task_lists_by_user(user_id) do
