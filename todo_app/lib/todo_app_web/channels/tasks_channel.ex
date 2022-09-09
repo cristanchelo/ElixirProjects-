@@ -3,6 +3,8 @@ defmodule TodoAppWeb.TasksChannel do
 
   @impl true
   def join("tasks:" <> _id, payload, socket) do
+    IO.inspect(payload, label: "PAYLOAD: ")
+
     if authorized?(payload) do
       {:ok, socket}
     else
@@ -21,7 +23,16 @@ defmodule TodoAppWeb.TasksChannel do
   # broadcast to everyone in the current topic (tasks:lobby).
   @impl true
   def handle_in("shout", payload, socket) do
-    broadcast(socket, "shout", payload)
+    broadcast(socket, "new_msg", payload)
+    {:noreply, socket}
+  end
+
+  # It is also common to receive messages from the client and
+  # broadcast to everyone in the current topic (tasks:lobby).
+  @impl true
+  def handle_in(_, payload, socket) do
+    #IO.inspect(binding(), label: "HANDLE_IN")
+    broadcast(socket, "new_msg", payload)
     {:noreply, socket}
   end
 
