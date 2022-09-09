@@ -6,12 +6,13 @@ defmodule TodoApp.Todos.TaskList do
   alias TodoApp.Accounts.User
   alias TodoApp.Todos.TasksListAssoc
   alias TodoApp.Todos.Task
+  alias TodoApp.Todos.CollabTaskListAssocs
 
   schema "task_lists" do
     field :name, :string
     field :tags, {:array, :string}
     belongs_to :user, User
-    has_many :collaborators, User
+    many_to_many :users, User, join_through: CollabTaskListAssocs
     many_to_many :tasks, Task, join_through: TasksListAssoc
     timestamps()
   end
