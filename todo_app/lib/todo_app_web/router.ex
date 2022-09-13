@@ -22,6 +22,7 @@ defmodule TodoAppWeb.Router do
 
     get "/", PageController, :index
     live "/simple", SimpleLive
+    live "/lists_tasks", ListTaskLive
   end
 
   # Other scopes may use custom stacks.

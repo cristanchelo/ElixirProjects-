@@ -45,7 +45,8 @@ defmodule TodoAppWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {TodoAppWeb.LayoutView, "live.html"}
+      layout: {TodoAppWeb.LayoutView, "live.html"},
+      layout: {TodoAppWeb.ListTaskLive, "list_task_live.html"}
 
       unquote(view_helpers())
     end
