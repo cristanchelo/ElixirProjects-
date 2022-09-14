@@ -1,12 +1,12 @@
-defmodule ListTaskLive do
-  use Phoenix.LiveView
+defmodule TodoAppWeb.ListTaskLive do
+  use TodoAppWeb, :live_view
 
   alias TodoApp.Todos.TaskList
   alias TodoApp.Todos.Task
   alias TodoApp.Todos
 
   def mount(_params, _session, socket) do
-    changeset = Todos.change_list(%TaskList{})
+    changeset = Todos.change_task_list(%TaskList{})
     socket = socket |> assign(changeset: changeset, tasks: [])
     {:ok, socket}
   end
@@ -15,6 +15,10 @@ defmodule ListTaskLive do
     socket =
       socket
       |> assign(:tasks, [%Task{} | socket.assigns.tasks])
+    {:noreply, socket}
+  end
+
+  def handle_event("validate_task_" <> index, %{"task" => task_params}, socket) do
     {:noreply, socket}
   end
 
